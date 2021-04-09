@@ -233,6 +233,10 @@ export class StockPage implements OnInit {
     await alert.present();
   }
   updateUsedCount(data, stockData) {
+    if(data.date==''){
+      alert("Give date first");
+    }
+    else{
     this.user.editStock({
       useItem_count: parseInt(data.used_count) + stockData.useItem_count
     }, stockData._id).subscribe((res) => {
@@ -247,7 +251,8 @@ export class StockPage implements OnInit {
     
 // debugger
     });
-  
+    }
+   
   }
   saveStockTransection(data) {
     this.user.saveStockTransection(data).subscribe((data) => {
@@ -257,4 +262,54 @@ export class StockPage implements OnInit {
   }
  
 
+
+  //updateTotalItem
+
+  async updatetotalItemCount(stockData) {
+   
+    let self = this;
+    
+    const alert = await this.alertController.create({
+      
+      cssClass: 'my-custom-class',
+      header: 'Update Total Item',
+      inputs: [
+        { 
+         
+          name: 'totalItem_count',
+          type: 'number',
+          placeholder: 'Enter Value(Total-Items)'
+        },
+        // multiline input.
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            console.log('Confirm Ok', data);
+            self.updateTotalCount(data,stockData)
+            // debugger     
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  updateTotalCount(data, stockData) {
+    this.user.editStock({
+      totalItem_count: parseInt(data.totalItem_count) + stockData.totalItem_count
+    }, stockData._id).subscribe((res) => {
+      console.log("TotalItem Update succesfully",res);
+      
+      });
+
+    }
 }

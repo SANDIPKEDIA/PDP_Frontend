@@ -39,10 +39,13 @@
             <!-- <span class="tag-name" *ngIf="(stock.totalItem_count-stock.useItem_count) == 0">Total / Available : &nbsp; &nbsp;{{stock.totalItem_count}}/&nbsp;{{stock.totalItem_count-stock.useItem_count}}&nbsp;&nbsp;{{stock.quantity}}</span> -->
 
           </ion-col>
-           <ion-col size="2">
+           <ion-col>
           </ion-col>
-          <ion-col size="1">
+          <ion-col>
             <ion-icon  *ngIf="(stock.totalItem_count-stock.useItem_count) > 0"  class="call-icon" (click)="updateUseItemCount(stock)" name="create-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <ion-icon class="call-icon" (click)="updatetotalItemCount(stock)" name="add-outline"></ion-icon>
           </ion-col>
         </ion-row>  
       </ion-grid>
