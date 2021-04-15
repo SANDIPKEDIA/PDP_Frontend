@@ -114,10 +114,7 @@ const routes: Routes = [
     path: 'routine',
     loadChildren: () => import('./pages/routine/routine.module').then( m => m.RoutinePageModule)
   },
-  {
-    path: 'stock-management',
-    loadChildren: () => import('./pages/stock-management/stock.module').then( m => m.GitPageModule)
-  }
+  
 
 ];
 

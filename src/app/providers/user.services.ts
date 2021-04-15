@@ -145,38 +145,6 @@ export class UserServices {
     );
 
   }
-  saveStock(body)
-  {
-    let url=this.baseUrl2 + "/api/v1/createstock"
-    return this.http.post(url,body);
-  }
-  editStock(body,id)
-  {
-    let url=this.baseUrl2 + "/api/v1/editstock/"+id
-    return this.http.put(url,body);
-  }
-  getStock()
-  {
-    let url=this.baseUrl2 + "/api/v1/getallstock"
-    return this.http.get(url);
-  }
-  deleteStock(id)
-  {
-    let url=this.baseUrl2 + "/api/v1/deletestock/"+id
-    return this.http.delete(url);
-  }
-
-  saveStockTransection(body)
-  {
-    let url=this.baseUrl2 + "/api/v1/createstocktransection"
-    return this.http.post(url,body);
-  }
-  getStockTransectionDetails(id)
-  {
-    let url=this.baseUrl2 + `/api/v1/getstocktransectionbyid/${id}`
-    return this.http.get(url);
-  }
-
  
   //
 
