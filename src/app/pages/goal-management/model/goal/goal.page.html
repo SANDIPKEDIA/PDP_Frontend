@@ -1,10 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/daymgnt"
-        (click)="closeModal()"
-      ></ion-back-button>
+      <ion-back-button defaultHref="/daymgnt" (click)="closeModal()"></ion-back-button>
     </ion-buttons>
     <ion-title id="top">Goal</ion-title>
   </ion-toolbar>
@@ -13,12 +10,30 @@
 <ion-content [fullscreen]="true">
   <div class="container">
     <div class="row">
-        <div class="form-bg">
-             <form [formGroup]="goalForm" (ngSubmit)="createGoal(goalForm)">
+      <div class="form-bg">
+        <form [formGroup]="goalForm" (ngSubmit)="createGoal(goalForm)">
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : goalForm.get('title').errors && (goalForm.get('title').touched || goalForm.get('title').dirty) }">
+
               <ion-item>
                 <ion-label>Goal Title : </ion-label>
                 <ion-input type="text" placeholder="Goal Title" formControlName="title"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="goalForm.get('title').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Title is required*
+            </span>
+          </div>
+          <br>
+
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : goalForm.get('type').errors && (goalForm.get('type').touched || goalForm.get('type').dirty) }">
+
               <ion-item>
                 <ion-label>Goal Type : </ion-label>
                 <ion-select placeholder="Type" formControlName="type">
@@ -26,20 +41,68 @@
                   <ion-select-option value="long_term">LONG TERM</ion-select-option>
                   <ion-select-option value="med_term">MED TERM</ion-select-option>
                 </ion-select>
+
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="goalForm.get('type').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Type is required*
+            </span>
+          </div>
+          <br>
+
+
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : goalForm.get('expectedCompleteddate').errors && (goalForm.get('expectedCompleteddate').touched || goalForm.get('expectedCompleteddate').dirty) }">
+
               <ion-item>
                 <ion-label>Expected Completed Date : </ion-label>
                 <ion-input type="date" formControlName="expectedCompleteddate"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="goalForm.get('expectedCompleteddate').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;ExpectedCompleteddate is required*
+            </span>
+          </div>
+          <br>
+
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : goalForm.get('description').errors && (goalForm.get('description').touched || goalForm.get('description').dirty) }">
+
               <ion-item>
                 <ion-label>Description : </ion-label>
-                <ion-input type="text" placeholder="Goal Description" formControlName="description"></ion-input>
+                <ion-textarea placeholder="Goal Description" formControlName="description"></ion-textarea>
               </ion-item>
-              <br>
-              <ion-button color="primary" type="submit" value="Save">Save</ion-button>
-              <ion-button color="secondary"  type="button" value="Update" (click)="updateGoal(goalForm)">Update</ion-button>
-              </form>
-        </div>
+            </div>
+            <span class="help-block" *ngIf="goalForm.get('description').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Description is required*
+            </span>
+          </div>
+
+
+          <br>
+          <ion-button type="submit" [disabled]="goalForm.invalid" *ngIf='goalForm.invalid' color="primary">save (Please
+            Fill all Required* fields First)</ion-button>
+
+          <ion-button type="submit" [disabled]="goalForm.invalid" *ngIf='goalForm.valid' color="primary">Save
+          </ion-button>
+
+          <ion-button type="button" [disabled]="goalForm.invalid" *ngIf='goalForm.valid' color="primary" value="update"
+            (click)="updateGoal(goalForm)">Update</ion-button>
+          <ion-button type="button" [disabled]="goalForm.invalid" *ngIf='goalForm.invalid' color="primary"
+            value="update" (click)="updateGoal(goalForm)">Update(Please Fill all
+            Required*
+            fields First)</ion-button>
+
+
+        </form>
+      </div>
     </div>
-</div>
+  </div>
 </ion-content>

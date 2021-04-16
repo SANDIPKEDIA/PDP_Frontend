@@ -1,10 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/emimgnt"
-        (click)="closeModal()"
-      ></ion-back-button>
+      <ion-back-button defaultHref="/emimgnt" (click)="closeModal()"></ion-back-button>
     </ion-buttons>
     <ion-title id="top">EMI</ion-title>
   </ion-toolbar>
@@ -13,43 +10,147 @@
 <ion-content [fullscreen]="true">
   <div class="container">
     <div class="row">
-        <div class="form-bg">
-             <form [formGroup]="emiForm" (ngSubmit)="createEmi(emiForm)">
+      <div class="form-bg">
+        <form [formGroup]="emiForm" (ngSubmit)="createEmi(emiForm)">
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : emiForm.get('loan_name').errors && (emiForm.get('loan_name').touched || emiForm.get('loan_name').dirty) }">
+
               <ion-item>
                 <ion-label>Loan Name : </ion-label>
-                <ion-input type="text" placeholder="Task Name" formControlName="loan_name"></ion-input>
+                <ion-input loan_name="text" placeholder="Loan Name" formControlName="loan_name"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="emiForm.get('loan_name').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Loan Name is required*
+            </span>
+          </div>
+          <br>
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : emiForm.get('emi_ammount').errors && (emiForm.get('emi_ammount').touched || emiForm.get('emi_ammount').dirty) }">
+
               <ion-item>
                 <ion-label>Emi Ammount : </ion-label>
                 <ion-input type="text" placeholder="Emi Ammount" formControlName="emi_ammount"></ion-input>
               </ion-item>
+
+            </div>
+            <span class="help-block" *ngIf="emiForm.get('emi_ammount').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Emi Ammount is required*
+            </span>
+          </div>
+          <br>
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : emiForm.get('loan_ammount').errors && (emiForm.get('loan_ammount').touched || emiForm.get('loan_ammount').dirty) }">
+
               <ion-item>
                 <ion-label>Loan Ammount : </ion-label>
                 <ion-input type="text" placeholder="Loan Ammount" formControlName="loan_ammount"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="emiForm.get('loan_ammount').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Loan Ammount is required*
+            </span>
+          </div>
+          <br>
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : emiForm.get('percentage').errors && (emiForm.get('percentage').touched || emiForm.get('percentage').dirty) }">
+
 
               <ion-item>
                 <ion-label>ROI : </ion-label>
                 <ion-input type="text" placeholder="Rate Of Interest" formControlName="percentage"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="emiForm.get('percentage').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Percentage is required*
+            </span>
+          </div>
+          <br>
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : emiForm.get('description').errors && (emiForm.get('description').touched || emiForm.get('description').dirty) }">
+
               <ion-item>
                 <ion-label>Description : </ion-label>
                 <ion-input type="text" placeholder="Description" formControlName="description"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="emiForm.get('description').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Description is required*
+            </span>
+          </div>
+          <br>
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : emiForm.get('tenureIn_months').errors && (emiForm.get('tenureIn_months').touched || emiForm.get('tenureIn_months').dirty) }">
 
               <ion-item>
                 <ion-label>Tenure In Month : </ion-label>
                 <ion-input type="text" placeholder="Tenure In Month" formControlName="tenureIn_months"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="emiForm.get('tenureIn_months').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;TenureIn Months is required*
+            </span>
+          </div>
+          <br>
+
+
+          <div class="form-group">
+            <div
+              [ngClass]="{'has-error' : emiForm.get('lastdate').errors && (emiForm.get('lastdate').touched || emiForm.get('lastdate').dirty) }">
+
               <ion-item>
                 <ion-label>Last Date : </ion-label>
                 <ion-input type="date" formControlName="lastdate"></ion-input>
               </ion-item>
-                <br>
-                <ion-button color="primary" type="submit" value="Save">Save</ion-button>
-                <ion-button *ngIf='!isEditMode' color="secondary"  type="button" value="Update" (click)="updateEmi(emiForm)">Update</ion-button>
-              </form>
-        </div>
+            </div>
+            <span class="help-block" *ngIf="emiForm.get('lastdate').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Last Date is required*
+            </span>
+          </div>
+
+          <br>
+
+
+          <!-- <ion-button color="primary" type="submit" value="Save">Save</ion-button>
+          <ion-button *ngIf='!isEditMode' color="secondary" type="button" value="Update" (click)="updateEmi(emiForm)">
+            Update</ion-button>
+ -->
+
+          <ion-button type="submit" [disabled]="emiForm.invalid" *ngIf='emiForm.invalid' color="primary">save (Please
+            Fill all Required* fields First)</ion-button>
+
+          <ion-button type="submit" [disabled]="emiForm.invalid" *ngIf='emiForm.valid' color="primary">Save
+          </ion-button>
+
+          <ion-button type="button" [disabled]="emiForm.invalid" *ngIf='!isEditMode && emiForm.valid' color="primary"
+            value="update" (click)="updateEmi(emiForm)">Update</ion-button>
+          <ion-button type="button" [disabled]="emiForm.invalid" *ngIf='!isEditMode && emiForm.invalid' color="primary"
+            value="update" (click)="updateEmi(emiForm)">Update(Please Fill all
+            Required*
+            fields First)</ion-button>
+
+
+
+        </form>
+      </div>
     </div>
-</div>
+  </div>
 </ion-content>

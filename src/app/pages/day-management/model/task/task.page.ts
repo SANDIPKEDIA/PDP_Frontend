@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalController, ToastController } from "@ionic/angular";
-import { FormBuilder, FormGroup, FormControl, NgForm } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, NgForm, Validators } from "@angular/forms";
 import { DayManagementService } from '../../../../providers/day-management.service';
 import { ActivatedRoute } from "@angular/router";
 
@@ -60,11 +60,11 @@ export class TaskPageModel implements OnInit {
 
   initTaskForm() {
     this.taskForm = this._formBuilder.group({
-      task_name: new FormControl(),
+      task_name: new FormControl('', Validators.compose([Validators.required])),
       userId: new FormControl(),
-      incompleted_task: new FormControl(),
-      priority: new FormControl(),
-      date: new FormControl(), 
+      incompleted_task: new FormControl(''),
+      priority: new FormControl('', Validators.compose([Validators.required])),
+      date: new FormControl('', Validators.compose([Validators.required])), 
       id: new FormControl(""),
     });
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActionSheetController, ModalController, ToastController } from "@ionic/angular";
-import { FormBuilder, FormGroup, FormControl, NgForm } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, NgForm, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import {
   Camera,
@@ -73,10 +73,10 @@ export class AddEditDocPageModel implements OnInit {
 
   initDocForm() {
     this.docForm = this._formBuilder.group({
-      doc_name: new FormControl(),
+      doc_name: new FormControl('' ,Validators.compose([Validators.required])),
       userId: new FormControl(),
-      doc_image: new FormControl(),
-      folder_id: new FormControl(), 
+      doc_image: new FormControl('', Validators.compose([Validators.required])),
+      folder_id: new FormControl('', Validators.compose([Validators.required])), 
       date: new FormControl(), 
       owner_id : new FormControl(),
       id: new FormControl(""),

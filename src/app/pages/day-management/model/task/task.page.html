@@ -15,10 +15,29 @@
     <div class="row">
         <div class="form-bg">
              <form [formGroup]="taskForm" (ngSubmit)="createTask(taskForm)">
+             
+             
+             
+              <div class="form-group">
+                <div
+                  [ngClass]="{'has-error' : taskForm.get('task_name').errors && (taskForm.get('task_name').touched || taskForm.get('task_name').dirty) }">
+    
               <ion-item>
                 <ion-label>Task Name : </ion-label>
                 <ion-input type="text" placeholder="Task Name" formControlName="task_name"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="taskForm.get('task_name').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Task Name is required*
+            </span>
+          </div>
+              <br>
+
+              <div class="form-group">
+                <div
+                  [ngClass]="{'has-error' : taskForm.get('priority').errors && (taskForm.get('priority').touched || taskForm.get('priority').dirty) }">
+    
               <ion-item>
                 <ion-label>Priority : </ion-label>
                 <ion-select placeholder="Priority" formControlName="priority">
@@ -27,13 +46,51 @@
                   <ion-select-option value="LOW">LOW</ion-select-option>
                 </ion-select>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="taskForm.get('priority').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Priority is required*
+            </span>
+          </div>
+              <br>
+
+
+              <div class="form-group">
+                <div
+                  [ngClass]="{'has-error' : taskForm.get('date').errors && (taskForm.get('date').touched || taskForm.get('date').dirty) }">
+    
               <ion-item>
                 <ion-label>Date : </ion-label>
                 <ion-input type="date" formControlName="date"></ion-input>
               </ion-item>
-                <br>
-                <ion-button *ngIf="!data" color="primary" type="submit" value="Save">Save</ion-button>
+            </div>
+            <span class="help-block" *ngIf="taskForm.get('date').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Date is required*
+            </span>
+          </div>
+<br>
+
+
+                <!-- <ion-button *ngIf="!data" color="primary" type="submit" value="Save">Save</ion-button>
                 <ion-button *ngIf="data" color="secondary"  type="button" value="Update" (click)="updateTask(taskForm)">Update</ion-button>
+ -->
+
+
+                <ion-button type="submit" [disabled]="taskForm.invalid" *ngIf='!data && taskForm.invalid' color="primary">save (Please
+                  Fill all Required* fields First)</ion-button>
+      
+                <ion-button type="submit" [disabled]="taskForm.invalid" *ngIf='!data && taskForm.valid' color="primary">Save
+                </ion-button>
+      
+                <ion-button type="button" [disabled]="taskForm.invalid" *ngIf='data && taskForm.valid' color="primary"
+                  value="update" (click)="updateTask(taskForm)">Update</ion-button>
+                <ion-button type="button" [disabled]="taskForm.invalid" *ngIf='data && taskForm.invalid' color="primary"
+                  value="update" (click)="updateTask(taskForm)">Update(Please Fill all
+                  Required*
+                  fields First)</ion-button>
+             
+             
               </form>
         </div>
     </div>

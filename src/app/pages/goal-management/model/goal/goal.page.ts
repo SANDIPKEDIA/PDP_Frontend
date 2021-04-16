@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalController, ToastController } from "@ionic/angular";
-import { FormBuilder, FormGroup, FormControl, NgForm } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, NgForm, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { GoalManagementService } from '../../../../providers/goal-management.service';
 
@@ -25,7 +25,7 @@ export class GoalPageModel implements OnInit {
   ) {}
 
   ngOnInit() {
-    debugger
+    // debugger
     this.initGoalForm();
     if(this.data != undefined){
       this.goalForm.patchValue(this.data);
@@ -59,12 +59,12 @@ export class GoalPageModel implements OnInit {
 
   initGoalForm() {
     this.goalForm = this._formBuilder.group({
-      title: new FormControl(),
+      title: new FormControl('', Validators.compose([Validators.required])),
       userId: new FormControl(),
-      type: new FormControl(),
-      expectedCompleteddate: new FormControl(),
+      type: new FormControl('', Validators.compose([Validators.required])),
+      expectedCompleteddate: new FormControl('', Validators.compose([Validators.required])),
       completeddate: new FormControl(), 
-      description: new FormControl(),
+      description: new FormControl('', Validators.compose([Validators.required])),
       id: new FormControl(""),
     });
   }

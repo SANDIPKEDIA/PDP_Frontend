@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalController, ToastController } from "@ionic/angular";
-import { FormBuilder, FormGroup, FormControl, NgForm } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, NgForm, Validators } from "@angular/forms";
 import { EMIManagementService } from '../../../../providers/emi-management.service';
 import { ActivatedRoute } from "@angular/router";
 
@@ -59,14 +59,14 @@ export class EMIPageModel implements OnInit {
 
   initEmiForm() {
     this.emiForm = this._formBuilder.group({
-      loan_name: new FormControl(),
-      userId: new FormControl(),
-      emi_ammount: new FormControl(),
-      tenureIn_months: new FormControl(),
-      loan_ammount: new FormControl(), 
-      lastdate: new FormControl(), 
-      percentage: new FormControl(), 
-      description: new FormControl(), 
+      loan_name: new FormControl('', Validators.compose([Validators.required])),
+      userId: new FormControl(''),
+      emi_ammount: new FormControl('', Validators.compose([Validators.required])),
+      tenureIn_months: new FormControl('', Validators.compose([Validators.required])),
+      loan_ammount: new FormControl('', Validators.compose([Validators.required])), 
+      lastdate: new FormControl('', Validators.compose([Validators.required])), 
+      percentage: new FormControl('', Validators.compose([Validators.required])), 
+      description: new FormControl('', Validators.compose([Validators.required])), 
       id: new FormControl(""),
     });
   }

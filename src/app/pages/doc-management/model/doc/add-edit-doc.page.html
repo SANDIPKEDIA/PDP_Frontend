@@ -23,15 +23,43 @@
     <div class="row">
         <div class="form-bg">
              <form [formGroup]="docForm" (ngSubmit)="createDoc(docForm)">
+
+              <div class="form-group">
+                <div
+                  [ngClass]="{'has-error' : docForm.get('doc_name').errors && (docForm.get('doc_name').touched || docForm.get('doc_name').dirty) }">
+    
               <ion-item>
                 <ion-label>Doc Name : </ion-label>
                 <ion-input type="text" placeholder="Title" formControlName="doc_name"></ion-input>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="docForm.get('doc_name').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Doc Name is required*
+            </span>
+          </div>
+          <br>
+
+              <div class="form-group">
+                <div
+                  [ngClass]="{'has-error' : docForm.get('doc_image').errors && (docForm.get('doc_image').touched || docForm.get('doc_image').dirty) }">
+    
               <ion-item>
                 <ion-label>Image : </ion-label>
                 <ion-input type="text" placeholder="Content" formControlName="doc_image"></ion-input>
               </ion-item>
-             
+            </div>
+            <span class="help-block" *ngIf="docForm.get('doc_image').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;Image is required*
+            </span>
+          </div>
+          <br>
+
+              <div class="form-group">
+                <div
+                  [ngClass]="{'has-error' : docForm.get('folder_id').errors && (docForm.get('folder_id').touched || docForm.get('folder_id').dirty) }">
+    
               <ion-item>
                 <ion-label>Folder : </ion-label>
                 <ion-select placeholder="Folder" formControlName="folder_id">
@@ -40,9 +68,31 @@
                 </section>
                 </ion-select>
               </ion-item>
+            </div>
+            <span class="help-block" *ngIf="docForm.get('folder_id').errors?.required">
+              <!-- <br> -->
+              &nbsp;&nbsp;&nbsp;&nbsp;FolderId is required*
+            </span>
+          </div>
+<br>
+
                 <br>
-                <ion-button *ngIf='!data' color="primary" type="submit" value="Save">Save</ion-button>
+                <!-- <ion-button *ngIf='!data' color="primary" type="submit" value="Save">Save</ion-button>
                 <ion-button *ngIf='data'  color="secondary"  type="button" value="Update" (click)="updateDoc(docForm)">Update</ion-button>
+              -->
+                <ion-button type="submit" [disabled]="docForm.invalid" *ngIf='!data && docForm.invalid' color="primary">save (Please
+                  Fill all Required* fields First)</ion-button>
+      
+                <ion-button type="submit" [disabled]="docForm.invalid" *ngIf='!data && docForm.valid' color="primary">Save
+                </ion-button>
+      
+                <ion-button type="button" [disabled]="docForm.invalid" *ngIf='data && docForm.valid' color="primary"
+                  value="update" (click)="updateDoc(docForm)">Update</ion-button>
+                <ion-button type="button" [disabled]="docForm.invalid" *ngIf='data && docForm.invalid' color="primary"
+                  value="update" (click)="updateDoc(docForm)">Update(Please Fill all
+                  Required*
+                  fields First)</ion-button>
+             
               </form>
         </div>
     </div>

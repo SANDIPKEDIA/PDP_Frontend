@@ -60,11 +60,7 @@ public newTotalCount =0;
       url: "/emimgnt",
       icon: "receipt-outline",
     },
-    {
-      title: "Stock Management",
-      url: "/stock-management",
-      icon: "receipt-outline",
-    },
+
   ];
   loggedIn = false;
   dark = false;
